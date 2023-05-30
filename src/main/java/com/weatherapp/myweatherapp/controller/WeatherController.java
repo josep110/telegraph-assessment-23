@@ -74,8 +74,6 @@ public class WeatherController {
       CityInfo ca = weatherService.forecastByCity(city_a);
       CityInfo cb = weatherService.forecastByCity(city_b);
 
-      System.out.println(ca);
-
       boolean raining_a = raining(ca);
       boolean raining_b = raining(cb);
 

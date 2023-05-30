@@ -37,3 +37,10 @@ The implementation of this feature works as follows:
    Otherwise, if raining(citya) returns true, return a ResponseEntity with String body: "It is raining in {citya}".
    Otherwise, if raining(cityb) returns true, return a ResponseEntity with String body: "It is raining in {cityb}".
    Otherwise, return a ResponseEntity with String body: "It is not raining in either {citya} or {cityb}.".
+
+
+## TESTING ##
+
+I wrote unit tests for each feature within MyweatherappApplicationTests.java
+Each unit test creates a new instance of WeatherController, and the tested methods within are passed pre-defined city inputs, that are compared using
+assertEquals() to the 'correct' (at time of testing) response.
