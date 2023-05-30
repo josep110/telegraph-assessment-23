@@ -1,0 +1,46 @@
+## APPROACH ##
+
+After creating an account with Visual Crossing and entering the API key into application.properties, I went about writing the Controller endpoints for daylight comparison and rain checking.
+
+## IMPLEMENTATION ##
+
+
+-- Daylight Hours comparison --
+
+
+The implementation of this feature works as follows:
+
+1. Create and populate CityInfo objects for each entered city entered within URL.
+
+2. Within helper function getDaylight(CityInfo c), for both entered cities:
+    a. Retrieve string form sunrise, sunset times
+    b. Convert both to LocalTime objects.
+    c. Use LocalTime.until() to find difference (in minutes), and return this value (long).
+
+3. If city a has longer returned daylight minutes, return this city as a ResponseEntity(CityInfo).
+   Otherwise, return city b as ResponseEntity(CityInfo)
+
+
+-- Rain Check --
+
+
+The implementation of this feature works as follows:
+
+1. Create and populate CityInfo objects for both entered cities entered within URL.
+
+2. Within helper function raining(CityInfo c), for both entered cities:
+    a. Retrieve string form conditions field.
+    b. Check for presence of substring "Rain" or "rain".
+    c. If found, return true. If not found, return false.
+
+3. If both calls to raining return true, return a ResponseEntity with String body: "It is raining in both {citya} and {cityb}".
+   Otherwise, if raining(citya) returns true, return a ResponseEntity with String body: "It is raining in {citya}".
+   Otherwise, if raining(cityb) returns true, return a ResponseEntity with String body: "It is raining in {cityb}".
+   Otherwise, return a ResponseEntity with String body: "It is not raining in either {citya} or {cityb}.".
+
+
+## TESTING ##
+
+I wrote unit tests for each feature within MyweatherappApplicationTests.java
+Each unit test creates a new instance of WeatherController, and the tested methods within are passed pre-defined city inputs, that are compared using
+assertEquals() to the 'correct' (at time of testing) response.
